@@ -1,3 +1,87 @@
 git remote add origin https://github.com/JeeventhiranV/NexusLOS.git
 git branch -M main
 git push -u origin main
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICE REGISTRY (EUREKA)
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Use these ONLY:
+Spring Cloud Eureka Server
+
+pom.xml
+
+<properties>
+    <java.version>17</java.version>
+    <spring-cloud.version>2023.0.1</spring-cloud.version>
+</properties>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>${spring-cloud.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+</dependency>
+
+ServiceRegistryApplication:
+
+package com.minilos.serviceregistry;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
+@EnableEurekaServer
+@SpringBootApplication
+public class ServiceRegistryApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceRegistryApplication.class, args);
+    }
+}
+
+
+application.yaml:
+
+server:
+  port: 8761
+
+spring:
+  application:
+    name: service-registry
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+API GATEWAY (NexusLOS)
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Use these ONLY:
+Spring Cloud Gateway
+Eureka Discovery Client
+Spring Boot Actuator
+
+
+
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.2.5</version>
+</parent>
+
+
+<spring-cloud.version>2023.0.1</spring-cloud.version>
