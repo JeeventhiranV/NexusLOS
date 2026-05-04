@@ -1,4 +1,4 @@
-# 🚀 Mini LOS (Loan Origination System)
+# 🚀 NexusLOS (Loan Origination System)
 
 ## 🧠 Overview
 
